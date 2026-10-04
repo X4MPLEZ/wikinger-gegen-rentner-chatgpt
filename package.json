@@ -1,0 +1,13 @@
+{
+  "name": "wikinger-gegen-rentner-chatgpt",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node tests/browser.cjs",
+    "test:performance": "node tests/performance.cjs",
+    "test:simulation": "node tests/simulation.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}
