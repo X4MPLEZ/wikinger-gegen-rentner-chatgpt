@@ -1,3 +1,48 @@
+# Weiterentwicklung vom 5. Oktober 2026
+
+Ausschließlich `X4MPLEZ/wikinger-gegen-rentner-chatgpt`, Ausgangsstand `887697e3b9bab583d0bcbfda58463655a9b3eedb`. Das Originalrepository wurde in dieser Iteration weder ausgecheckt noch verändert.
+
+## Integration
+
+- `startAir`, `airStep`, `advanceGround`: ein gemeinsamer ballistischer Zustand für Dash, Stoß und Klippensturz. Navigation, Trennung und Terrain-Snapping setzen fliegende Einheiten nicht auf den Boden. Horizontale Geschwindigkeit bleibt erhalten; Felswände blockieren seitliches Eindringen ohne die Figur hochzusetzen. Todessnapshots enthalten die tatsächliche Endposition; Leichen bleiben am Aufprallort.
+- `ramImpulse`: Hauptimpuls nach vorne, maximal kleinere seitliche Komponente und kurzer vertikaler Impuls. Beide Fraktionen verwenden dieselbe Berechnung.
+- `iceVelocity`, `iceStep`: Eis erreicht ungefähr 1,42-fache Zielgeschwindigkeit, beschleunigt schnell und hält beim Drehen/Rollen den Schwung. Intaktes Eis erhält keinen Wasserwiderstand. Löcher bleiben dauerhaft und interagieren mit späteren Einheiten; räumlicher Index und drei gemeinsame InstancedMeshes begrenzen die Darstellungskosten.
+- Arktis: normales Wasser ausgeblendet, Eis über der gesamten sichtbaren Wasserzone einschließlich 900×900-Horizontfläche. Brücken bleiben unverändert nutzbar.
+- `hitBear`, `tameBearStep`, `updateWorld`: 0,65 s Zusammenbruch, 1 s Teamfarben-/Herzeffekt, 0,6 s Aufstehen. Erst danach wird der Bär eine aktive verbündete Einheit. Bärenansichten und Farbstufen werden wiederverwendet.
+- `baseAttackSlots`, `baseApproach`, `applyCmd`: direkte Base-Befehle speichern ein explizites Ziel und verteilen Angreifer auf gültige Nahkampfpositionen außerhalb des Colliders. Ein neuer Spielerauftrag ersetzt den alten Angriff.
+- `genCode`, `hostOnline`, `showLobby`: sechsstellige Zahlencodes im bestehenden Menüfeld; Kopieren und Abbrechen inline. Kein zusätzlicher Code-Dialog. Alle fünf Bot-Stufen zeigen unterschiedliche gecachte Bot-Gesichter. Mobile HUD-Anordnung verhindert Überlappung der Armeeanzeige.
+- `tutCommand`, `tutEnemySelected`, `tutMovementDone`: erste Fahne verlangt tatsächliche Bewegung beider Einheiten; Gegnerauswahl per PC-Linksklick bzw. Mobile-Langdruck. Profi-Aufgabe verlangt aktiven Laufmodus und Ankunft an der Fahne; Fehler setzen den Schritt vollständig zurück. Zwei konkrete Auto-Schaltflächen leuchten und müssen beide aktiviert sein. Kontertext beginnt mit dem gewünschten Satz; Chaos-Erklärung entfällt.
+- `snapOf`, `possStep`, `updateWorld`, `renderUnits`: Flugposition/-geschwindigkeit und Bestätigungen werden übertragen. Neue und alte Flüge werden unterschieden; veraltete Flugpakete starten keinen neuen Sprung. Bei verpasstem kurzem Flug wird der lokale Zustand wieder mit dem Host abgeglichen. Protokoll **32**: beide Geräte neu laden.
+
+## Grafik und Ressourcen
+
+Bestehender Cartoon-/Low-Poly-Look, ACES, ein Hemisphere- und ein Sonnenlicht bleiben erhalten. Wärmere Sonnenseite, kühlere Schatten, felsigere steile Hänge und weichere Wiesen-/Uferübergänge. Leichte gemeinsame Shader-Windbewegung wird auf LOW deaktiviert. Wasser erhält günstige animierte Helligkeitsbewegung, Splash und instanzierte Ringe/Spuren. Sprungpads besitzen große Pfeile und Chevrons auf derselben Abschussachse, mechanisches Scharnier und bewegte Federn.
+
+Das bereits vorhandene Partikel-Instancing wird mit getrennten Bewegungsprofilen für Staub, Landung, Dash, Pad, Treffer, Explosion, Wasser, Eis, Gebäude und Zähmung erweitert. 192 / 112 / 48 vorab angelegte Partikel, ein Draw Call; keine eigenen Materialien pro Partikel. Wellenringe verwenden einen zweiten Pool mit maximal 40 / 24 / 10 Einträgen. Wichtige nahe Einheiten werfen Schatten; entfernte Einheiten erhalten günstige Bodenkontaktschatten, die mit Höhe/Entfernung schwächer werden und am Boden bleiben. Bestehende Qualitäts- und Pixelratio-Grenzen bleiben erhalten. Einheitenpolygone werden nicht erhöht.
+
+## Verifikation
+
+```sh
+npm test
+npm run test:gameplay
+npm run test:graphics
+npm run test:air
+npm run test:performance -- /pfad/zu/vorher.html
+npm run test:simulation -- /pfad/zu/vorher.html
+```
+
+Wie bisher optional `WVR_THREE_PATH` für Three.js r128 offline; Playwright/Chromium erforderlich für WebGL-Tests.
+
+- Neue Gameplay-Suite: **1198 Prüfungen**, Desktop 1280×720 sowie tatsächliche Touch-Emulation 390×844. Zahlencodes, Inline-Erstellen, Tutorial-Bewegung/Auswahl/Fehlversuche/Auto, beide Base-Angriffe, beide Reiterstöße, Landung, Dash über Kante, tiefer Klippensturz und Leichenposition, vier Klassen auf Eis, permanente Löcher über 120 s, gefrorener Ozean und alle Zähmungsphasen beider Fraktionen. Keine JavaScript-/Shaderfehler.
+- Bestehende Suite: **917 Prüfungen**, anschließend zwei Browserfenster mit künstlicher Zustellverzögerung und 71 vollständig übertragenen Einheiten; Padflug, Landung und mobile Gaststeuerung bestanden. Keine Browserfehler.
+- Grafik-Suite: zwölf Pool-/Shader-/Schattenprüfungen bestanden. Mobiler Effektsturm mit 1.000 Bursts bleibt auf 48 Partikel begrenzt und erzeugt genau einen zusätzlichen Draw Call. Wellenpool und Partikelpool geben alle Einträge zurück.
+- Air-Netzwerktest: zweiter Flug nach erstem Flug, wiederholte alte Pakete, Bereinigung des Landepakets und steigender Körper vor einer Felswand bestanden.
+- Vergleich mit `887697e`: 100 Einheiten ohne Schatten, **2663 → 2668 Draw Calls** (zusätzliche Pad-Chevrons/Wellen); stationärer Snapshot **2974 → 2982 Bytes**. Partikel und Löcher bleiben instanziert. Kontrollierter Node-VM-Median bei 300 Ticks: **115,2 → 127,9 ms**, entsprechend etwa 0,043 ms zusätzlicher Simulationsaufwand pro Tick für neue Zustände. Browser-Messungen schwanken durch Software-WebGL/JIT; keine belastbare Smartphone-FPS-Aussage. Unnötige Klippen-/Blockerprüfungen für stationäre Einheiten wurden nach gemessenen Mehrkosten entfernt.
+
+Verbleibende Grenzen: echte Android-/iOS-GPUs und Safari, Mobilfunk/NAT über öffentliche PeerJS/STUN/TURN-Dienste, lange Partien und alle zufälligen Karten brauchen reale Gerätetests. Sehr große Nahkampfgruppen warten auf freie Plätze am Base-Umfang. Dauerhafte Löcher sind auf eine Einbruchstelle pro Rasterzelle begrenzt; ihre Snapshot-Größe wächst während einer Runde. Systemschrift-Rasterung kann weiterhin variieren; zentrale Spielsymbole verwenden SVG/Canvas.
+
+---
+
 # Separate Entwicklungsfassung – technische Prüfung
 
 Alle Änderungen betreffen ausschließlich `X4MPLEZ/wikinger-gegen-rentner-chatgpt`.

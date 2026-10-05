@@ -5,7 +5,10 @@
   "scripts": {
     "test": "node tests/browser.cjs",
     "test:performance": "node tests/performance.cjs",
-    "test:simulation": "node tests/simulation.cjs"
+    "test:simulation": "node tests/simulation.cjs",
+    "test:gameplay": "node tests/gameplay.cjs",
+    "test:graphics": "node tests/graphics.cjs",
+    "test:air": "node tests/air-network.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"
