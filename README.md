@@ -1,4 +1,4 @@
-# Rentner gegen Wikinger
+# Wikinger gegen Rentner – separate ChatGPT-Version
 
 3D-Strategiespiel mit direkter Einheitensteuerung, Physik-Chaos und Humor. Läuft im Browser auf Handy und PC, gegen den Computer oder online zu zweit.
 
@@ -11,7 +11,7 @@
 - **Übernehmen:** Jeder Krieger kann direkt gesteuert werden, mit Spezialfähigkeit (Reiter-Rammstoß, Pfeilfächer, Stockwirbel, Wikingerwurf …). Reiter können den Rammstoß auch mitten im Sprungpad-Flug zünden und landen rammend. Gesteuerte Katapulte treffen mit einem Volltreffer auf den Kopf doppelt.
 - **Kegeln:** Wer umgerammt oder geworfen wird, fliegt – und kegelt alle um, die im Weg stehen. Drei auf einen Streich sind ein „Strike“.
 - **Katapulte:** Der Wikinger-Fels rollt nach dem Einschlag weiter und walzt um, was im Weg steht. Die Rentner-Torte hinterlässt eine Sahnepfütze, in der jeder kleben bleibt.
-- **Konter sind sichtbar:** Reiter rennen Fernkämpfer um, Nahkämpfer hauen Reiter kurz vom Sattel, Pfeile bremsen Nahkämpfer – jedes Mal mit „KONTER!“-Marker. Ein gesteuerter Reiter stampft 0,3 s, bevor er losrammt: wer das sieht, kann noch wegspringen.
+- **Konter sind sichtbar:** Reiter rennen Fernkämpfer um, Nahkämpfer hauen Reiter kurz vom Sattel, Pfeile bremsen Nahkämpfer – jedes Mal mit „KONTER!“-Marker. Ein gesteuerter Reiter lädt 0,3 s auf und kann dabei weiterfahren, bevor er losrammt: wer das sieht, kann noch wegspringen.
 - **Ereignisse:** Nicht nach Uhr, sondern alle paar Minuten überraschend: eine **Nebelwand** (Gegner nur nahe eigener Krieger und der eigenen Basis sichtbar), ein **Goldwagen**, den man eskortieren muss, **„Kleine Armee, großer Sold“** (60 s lang bringt eine kleine Truppe mehr Gold) oder die **Fahnenwanderung** (alle Fahnen ziehen um). Oben links steht, was gerade läuft.
 - **Ego-Feldherr:** Als gesteuerter Krieger rufst du mit F (bzw. „Zu mir“) alle Krieger zu dir, mit V („Angriff!“) greifen alle an, was du anschaust, mit Tab („Wechseln“) springst du zum nächsten Krieger. Drei Kills in Folge laden die Spezialfähigkeit sofort wieder auf.
 - **Lesbares Chaos:** Kill-Feed oben links (wer wen womit erledigt hat), rote Gefahrenzonen vor rollenden Felsen und um gegnerische Sahnepfützen, über gegnerischen Riesenköpfen ein Ring, der zeigt, wann ihre Spezialfähigkeit wieder bereit ist.
@@ -21,7 +21,7 @@
 ## Karten
 
 - **Wiesen:** übersichtlich, Sprungpads über den Fluss.
-- **Wüste:** offen; Fernkämpfer und Katapulte schießen weiter, Kakteen stechen.
+- **Wüste:** Fernkämpfer und Katapulte schießen weiter, Kakteen stechen. Sandwirbel kündigen sich an und schleudern Einheiten hoch. Zwei wilde Sandwürmer können durch Besiegen gezähmt werden. Danach auswählen und übernehmen: **Spezial** gräbt für bis zu sechs Sekunden ein, **Angriff** lässt den Wurm von unten auftauchen und nahe Gegner hochwerfen. Unterirdisch lassen sich keine Fahnen erobern; Wasser und Basen begrenzen das Graben.
 - **Arktis:** schnelles, rutschiges Eis. Katapulttreffer brechen dauerhafte Löcher ins Eis, Eisbären lassen sich zähmen.
 - **Klippen:** Bodenlose Abgründe und Sprungpads. Reiter stoßen Gegner in die Tiefe; wer läuft, bleibt von selbst an der Kante stehen.
 
@@ -39,4 +39,4 @@ Unter „Grafik“ im Menü oder im Pausenmenü: **Automatisch**, Hoch, Mittel, 
 
 Einer tippt auf „Erstellen“, der andere öffnet dieselbe Seite und gibt den Code bei „Beitreten“ ein. Die Geräte verbinden sich direkt miteinander, eine Anmeldung ist nicht nötig.
 
-**Steuerung am Handy:** Unten eine Reihe runder Knöpfe (Bild = Einheit, Zahl = Preis); kurz tippen bildet aus, lange drücken schaltet AUTO ein (grüner Ring). Ego-Befehle liegen rechts oben.  Krieger antippen oder „Alle“ wählen, dann aufs Ziel tippen. Mit Auswahl ist jeder Tipp ein Befehl, auch auf eigene Krieger. „Abwählen“ hebt die Auswahl auf, danach lässt sich wieder ein einzelner Krieger antippen. Gegner werden nicht ausgewählt, sondern direkt angegriffen.
+**Steuerung am Handy:** Unten eine Reihe runder Knöpfe (Bild = Einheit, Zahl = Preis); kurz tippen bildet aus, lange drücken schaltet AUTO ein (grüner Ring). Ego-Befehle liegen rechts oben.  Krieger antippen oder „Alle“ wählen, dann aufs Ziel tippen. Ein Tipp auf einen eigenen Krieger wählt ihn direkt einzeln aus, auch wenn bereits andere ausgewählt sind. Ein Tipp auf den Boden erteilt der Auswahl einen Befehl. Gegner werden nicht ausgewählt, sondern direkt angegriffen.
