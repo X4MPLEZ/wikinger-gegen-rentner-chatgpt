@@ -3,7 +3,7 @@
 Ausschließlich `X4MPLEZ/wikinger-gegen-rentner-chatgpt` wurde geändert.
 Das Original wurde nur über GitHub-GET-Abfragen gelesen. Ausgangspunkt ist
 `c6caf52e705d1c740d5c2439f18eac4251ae4100` (Claude v39). Der Import-Commit
-`42cb48a` enthält dessen vier Spieldateien bytegleich, mit geprüften Git-Blob-Hashes.
+`83c2e5b` enthält dessen vier Spieldateien bytegleich, mit geprüften Git-Blob-Hashes.
 Frühere Codex-Änderungen sind damit durch den ausdrücklich gewünschten Claude-Stand ersetzt.
 
 ## Implementierung

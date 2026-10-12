@@ -9,7 +9,7 @@ const { performance } = require('node:perf_hooks');
 const { execFileSync } = require('node:child_process');
 
 const root = path.resolve(__dirname, '..');
-const baselineCommit = '42cb48a';
+const baselineCommit = '83c2e5b';
 const fixture = { seed:4242, units:100, ticks:300, warmupRuns:3, measuredRuns:9 };
 
 function simulationContext(html, label) {
