@@ -9,7 +9,7 @@ const { performance } = require('node:perf_hooks');
 const { execFileSync } = require('node:child_process');
 
 const root = path.resolve(__dirname, '..');
-const baselineCommit = '202e03f635312655f4b60365ae006c55c28f1ac2';
+const baselineCommit = '42cb48a';
 const fixture = { seed:4242, units:100, ticks:300, warmupRuns:3, measuredRuns:9 };
 
 function simulationContext(html, label) {
@@ -35,7 +35,7 @@ function measure(html, label) {
     let gameState;
     for (let run = 0; run < fixture.warmupRuns + fixture.measuredRuns; run++) {
       Math.random = game.rng(123456);
-      gameState = game.newGame(['viking', 'rentner'], fixture.seed);
+      gameState = game.newGame(['viking', 'rentner'], fixture.seed, false, {squad:false});
       gameState.cd = 0;
       gameState.bears = [];
       gameState.itemT = 1e9;

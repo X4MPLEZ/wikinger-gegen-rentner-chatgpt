@@ -5,7 +5,7 @@ const html = fs.readFileSync(require('node:path').join(__dirname, '..', 'index.h
 const start = html.indexOf("'use strict';"), end = html.indexOf('function cnv(', start);
 const source = `(() => { ${html.slice(start, end)}\n${html.match(/function segDist\([^\n]+/)[0]}\nreturn { newGame, step, spawnUnit, unitY, possStep, advanceGround, startAir, airStep, get MAP(){return MAP;} }; })()`;
 const w = vm.runInNewContext(source, { performance }, { timeout:10000 });
-const g = w.newGame(['viking', 'rentner'], 4242); g.cd = 0; g.bears = []; g.itemT = 1e9; g.towerOff = [true, true];
+const g = w.newGame(['viking', 'rentner'], 4242, false, {squad:false}); g.cd = 0; g.bears = []; g.itemT = 1e9; g.towerOff = [true, true];
 w.spawnUnit(g, 0, 4); const u = g.units[0]; u.poss = true; u.dashUntil = 10; g.teams[0].pos = u.id;
 function request(ack) {
   g.teams[0].posIn = { id:u.id, x:u.x, z:u.z, y:0, a:0, s:0, j:0, g:0, air:ack, flying:true, av:[4, 0, 1.3, 1, u.y + .2, u.y] };

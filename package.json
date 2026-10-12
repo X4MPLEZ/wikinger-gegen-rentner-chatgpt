@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "node tests/browser.cjs",
+    "test": "node tests/desert.cjs && node tests/air-network.cjs && node tests/release.cjs",
+    "test:gameplay": "node tests/desert.cjs",
+    "test:graphics": "node tests/release.cjs",
+    "test:air": "node tests/air-network.cjs",
     "test:performance": "node tests/performance.cjs",
-    "test:simulation": "node tests/simulation.cjs",
-    "test:gameplay": "node tests/gameplay.cjs",
-    "test:graphics": "node tests/graphics.cjs",
-    "test:air": "node tests/air-network.cjs"
+    "test:simulation": "node tests/simulation.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"
